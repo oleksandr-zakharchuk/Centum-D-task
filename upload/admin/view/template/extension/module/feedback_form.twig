@@ -1,0 +1,120 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-feed" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if error_warning %}
+            <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-feed" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-feedback-form">{{ entry_feedback_form_html }}</label>
+                        <div class="col-sm-10">
+                <textarea name="module_feedback_form_text" rows="5" id="input-feedback-form"
+                          class="form-control">{{ module_feedback_form_text }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                        <div class="col-sm-10">
+                            <select name="module_feedback_form_status" id="input-status" class="form-control">
+                                {% if module_feedback_form_status %}
+                                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                                    <option value="0">{{ text_disabled }}</option>
+                                {% else %}
+                                    <option value="1">{{ text_enabled }}</option>
+                                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-list"></i> {{ feedback_list }}</h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-category">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <td class="text-left">{% if sort == 'name' %}
+                                        <a href="{{ sort_name }}" class="{{ order|lower }}">{{ column_name }}</a>
+                                    {% else %}
+                                        <a href="{{ sort_name }}">{{ column_name }}</a>
+                                    {% endif %}</td>
+                                <td class="text-right">{% if sort == 'email' %}
+                                        <a href="{{ sort_email }}" class="{{ order|lower }}">{{ column_email }}</a>
+                                    {% else %}
+                                        <a href="{{ sort_email }}">{{ column_email }}</a>
+                                    {% endif %}</td>
+                                <td class="text-right">{% if sort == 'phone' %}
+                                        <a href="{{ sort_phone }}" class="{{ order|lower }}">{{ column_phone }}</a>
+                                    {% else %}
+                                        <a href="{{ sort_phone }}">{{ column_phone }}</a>
+                                    {% endif %}</td>
+                                <td class="text-right">{% if sort == 'created_at' %}
+                                        <a href="{{ sort_created_at }}" class="{{ order|lower }}">{{ column_created_at }}</a>
+                                    {% else %}
+                                        <a href="{{ sort_created_at }}">{{ column_created_at }}</a>
+                                    {% endif %}</td>
+                                <td class="text-right">{% if sort == 'page' %}
+                                        <a href="{{ sort_page }}" class="{{ order|lower }}">{{ column_page }}</a>
+                                    {% else %}
+                                        <a href="{{ sort_page }}">{{ column_page }}</a>
+                                    {% endif %}</td>
+                                <td class="text-right">{{ column_action }}</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if categories %}
+                                {% for category in categories %}
+                                    <tr>
+                                        <td class="text-left">{{ category.name }}</td>
+                                        <td class="text-left">{{ category.email }}</td>
+                                        <td class="text-left">{{ category.phone }}</td>
+                                        <td class="text-left">{{ category.created_at }}</td>
+                                        <td class="text-left">{{ category.page }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td class="text-center" colspan="4">{{ text_no_results }}</td>
+                                </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-sm-6 text-left">{{ pagination }}</div>
+                    <div class="col-sm-6 text-right">{{ results }}</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{{ footer }}

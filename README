@@ -1,0 +1,35 @@
+Module itself is located in the upload folder.
+Screenshots folder contains screenshots of the module's operation.
+
+Installation:
+1. Copy the contents of folder upload to your opencart 3 instance
+2. Go Extensions -> Extensions -> Modules
+3. Find "Feedback Form" module
+4. Click install
+5. Click edit
+6. Fill out "Feedback Form HTML" field
+7. Go to Catalog -> Information
+8. Click edit one of the pages
+9. Insert [feedback_form] into the Description field
+10. Go to the selected page on the front-end and submit the form
+11. Check the submitted form in the administration panel in "Feedback Form" module
+
+You can use the form below as an example. Don't forget to use [feedback_form_action] in the action attribute, this is necessary for dynamic URL generation. Example:
+
+<form action="[feedback_form_action]" method="post">
+	<p>
+		<label for="username">name:</label>
+		<input type="text" name="username" required />
+		<br />
+
+		<label for="email">email:</label>
+		<input type="text" name="email" required />
+		<br />
+
+		<label for="phone">phone:</label>
+		<input type="tel" id="phone" name="phone" required />
+		<br />
+
+		<input type="submit" value="Send">
+	</p>
+</form>
