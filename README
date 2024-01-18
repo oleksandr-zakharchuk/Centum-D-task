@@ -9,7 +9,7 @@ Installation:
 3. Find "Feedback Form" module
 4. Click install
 5. Click edit
-6. Fill out "Feedback Form HTML" field
+6. Fill out "Feedback Form HTML" field and set the status to Enabled.
 7. Go to Catalog -> Information
 8. Click edit one of the pages
 9. Insert [feedback_form] into the Description field
